@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 import pefile
 
@@ -23,7 +24,7 @@ def inject_stub(pe_file, stub_file):
     with open(pe_file, 'r+b') as f:
         if(len(dos_stub_contents) > old_dos_stub_size):
             f.seek(0x3d)
-            f.write((len(dos_stub_contents) + ((len(dos_stub_contents) - old_dos_stub_size))))
+            f.write(bytes((len(dos_stub_contents) + ((len(dos_stub_contents) - old_dos_stub_size)))))
         f.seek(64)
         f.write(dos_stub_contents)
         
